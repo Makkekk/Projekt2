@@ -3,53 +3,47 @@ package Opgave1;
 public class App {
     public static void main(String[] args) {
 
-        Team team1 = new Team("Team1", "1" );
-        Team team2 = new Team ("Team2", "2");
+        Team team1 = new Team("Team1 ", "rum 1 ");
+        Team team2 = new Team("Team2 ", "rum 47 ");
 
-        Student student1 = new Student();
-        Student student2 = new Student();
-        Student student3 = new Student();
-        Student student4 = new Student();
-        Student student5 = new Student();
-        Student student6 = new Student();
+        Student Student1 = new Student("Børge", true, new int[]{2, 4, 7});
+        Student Student2 = new Student("Biver", true, new int[]{4, 4, 4});
+        Student Student3 = new Student("Bent Betjent", false, new int[]{7, 7, 7});
+        Student Student4 = new Student("Anne", false, new int[]{4, 7, 12});
+        Student Student5 = new Student("Sanne", true, new int[]{12, 12, 12});
+        Student Student6 = new Student("Lis", true, new int[]{4, 1, 2});
 
-        student1.setName("Børge");
-        student1.setActive(true);
-        student1.setGrades(new int[] {2,4,12});
-
-        student1.setName("Biver");
-        student1.setActive(true);
-        student1.setGrades(new int[] {4,4,4});
-
-        student1.setName("Bent betjent");
-        student1.setActive(true);
-        student1.setGrades(new int[] {7,7,7});
-
-        student1.setName("Anne");
-        student1.setActive(true);
-        student1.setGrades(new int[] {4,7,12});
-
-        student1.setName("Sanne");
-        student1.setActive(true);
-        student1.setGrades(new int[] {12,12,12});
-
-        student1.setName("Lis");
-        student1.setActive(true);
-        student1.setGrades(new int[] {3,1,2});
-
-        team1.addStudent(student1);
-        team1.addStudent(student2);
-        team1.addStudent(student3);
-        team2.addStudent(student4);
-        team2.addStudent(student5);
-        team2.addStudent(student6);
+        //Add student
+        team1.addStudent(Student1);
+        team1.addStudent(Student2);
+        team1.addStudent(Student3);
+        team2.addStudent(Student4);
+        team2.addStudent(Student5);
+        team2.addStudent(Student6);
 
 
         System.out.println(team1);
-        System.out.println(student1);
-        System.out.println(student2);
-        System.out.println(student3);
+        System.out.println(team2);
+
+        //Test af metoder på et team
+        System.out.println("Aktive studerende i Team1");
+        for (Student student : team1.activeStudentInTeam()) {
+            System.out.println(student);
+
+        }
+        System.out.println("\nFjern studerende Børge fra team 1");
+        team1.removeStudent("børge");
+
+        //Se ændringen efter børge er væk
+        System.out.println(team1);
 
 
+        System.out.println("Højeste karater for: " + Student1.getNames() + ": " + Student1.getHøjestekarakter());
+        System.out.println("Højeste karater for: " + Student2.getNames() + ": " + Student2.getHøjestekarakter());
+        System.out.println("Højeste karater for: " + Student3.getNames() + ": " + Student3.getHøjestekarakter());
+        System.out.println("Højeste karater for: " + Student4.getNames() + ": " + Student4.getHøjestekarakter());
+        System.out.println("Højeste karater for: " + Student5.getNames() + ": " + Student5.getHøjestekarakter());
+        System.out.println("Højeste karater for: " + Student6.getNames() + ": " + Student6.getHøjestekarakter());
     }
 }
+
