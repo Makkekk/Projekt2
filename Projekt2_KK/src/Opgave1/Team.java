@@ -24,12 +24,8 @@ public class Team {
         for (int i = 0; i < studentList.size(); i++) {
             if (studentList.get(i).getNames().equals(studentName)) {
                 studentList.remove(i);
-                break; //Stop loopet
             }
-
         }
-
-        studentList.remove(name);
 
     }
 
@@ -43,7 +39,6 @@ public class Team {
 
             }
         }
-
         return activeStudent.toArray(new Student[0]); //konvertere Arraylist til et array.
     }
 
@@ -58,10 +53,6 @@ public class Team {
         }
     }
 
-    public ArrayList<Student> getStudentList() {
-        return studentList;
-    }
-
     @Override
     public String toString() {
         String result = "Teamnavn: " + name + " : " + room + "\n students:\n";
@@ -74,15 +65,14 @@ public class Team {
     }
 
     public double gennemsnitTeam() {
-        if (studentList.isEmpty())
-            return 0;
+        if (studentList == null) return 0;
 
         double totaleSumTeams = 0;
         for (Student student : studentList) {
             totaleSumTeams += student.studerendeGennemsnit();
         }
 
-        return (double) totaleSumTeams;
+        return totaleSumTeams;
     }
 
     public Student[] highScoreStudents(double minAverage) {
@@ -95,5 +85,21 @@ public class Team {
             }
         }
         return highScores.toArray(new Student[0]);
-            }
+    }
+
+    public String[] getStudentStatistics(char[] correctAnswer) {
+        String[] stats = new String[studentList.size() + 1]; //WHY??
+
+        stats[0] = String.format("%-20s %-10s %-10s", "Navn", "Gennemsnit", "Rigtige svar");
+
+        for (int i = 0; i < studentList.size(); i++) {
+            Student student = studentList.get(i);
+            double average = student.studerendeGennemsnit();
+            int correctcount = student.correctAnswers(correctAnswer);
+
+            stats[i + 1] = String.format("%-20s %-10.2f %-10d", student.getNames(), average, correctcount);
+        }
+        return stats;
+    }
+
 }
