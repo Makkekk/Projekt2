@@ -20,7 +20,7 @@ public class Team {
 
 
     public void removeStudent(String studentName) {
-       //Fjern students by name
+        //Fjern students by name
         for (int i = 0; i < studentList.size(); i++) {
             if (studentList.get(i).getNames().equals(studentName)) {
                 studentList.remove(i);
@@ -57,6 +57,7 @@ public class Team {
 
         }
     }
+
     public ArrayList<Student> getStudentList() {
         return studentList;
     }
@@ -71,4 +72,28 @@ public class Team {
         }
         return result;
     }
+
+    public double gennemsnitTeam() {
+        if (studentList.isEmpty())
+            return 0;
+
+        double totaleSumTeams = 0;
+        for (Student student : studentList) {
+            totaleSumTeams += student.studerendeGennemsnit();
+        }
+
+        return (double) totaleSumTeams;
+    }
+
+    public Student[] highScoreStudents(double minAverage) {
+
+        ArrayList<Student> highScores = new ArrayList<>();
+        //Iterer over alle studerende i et team
+        for (Student student : studentList) {
+            if (student.isActive() && student.studerendeGennemsnit() >= minAverage) {
+                highScores.add(student);
+            }
+        }
+        return highScores.toArray(new Student[0]);
+            }
 }
