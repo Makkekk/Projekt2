@@ -7,8 +7,8 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) {
 
-        Team team1 = new Team("Team1 ", "rum 1 ");
-        Team team2 = new Team("Team2 ", "rum 47 ");
+        Team team1 = new Team("Team1 ", "rum 1 ", new char[]{'A', 'B', 'C', 'D', 'D', 'C', 'B', 'A', 'D', 'A'});
+        Team team2 = new Team("Team2 ", "rum 47 ",new char[]{'A', 'B', 'C', 'D', 'D', 'C', 'B', 'A', 'D', 'A'});
 
         Student Student1 = new Student("Børge", true, new int[]{2, 4, 7});
         Student Student2 = new Student("Biver", true, new int[]{7, 7, 7});
@@ -44,14 +44,14 @@ public class App {
         //Statestik for aktive i teams 1
         System.out.println("\n  Statestik for team 1");
         for (Student student : team1.activeStudentInTeam()) {
-            System.out.println("Højeste karater for: " + student.getNames() + " = " + student.getHøjestekarakter());
-            System.out.println("Gennemsnit for studerende:" + student.getNames() + " : " + student.studerendeGennemsnit() + System.lineSeparator());
+            System.out.println("Højeste karater for: " + student.getName() + " = " + student.getHøjestekarakter());
+            System.out.println("Gennemsnit for studerende:" + student.getName() + " : " + student.studerendeGennemsnit() + System.lineSeparator());
         }
         //Statestik for aktive i teams 2
         System.out.println("\n  Statestik for team 2");
         for (Student student : team2.activeStudentInTeam()) {
-            System.out.println("Højeste karater for: " + student.getNames() + " = " + student.getHøjestekarakter());
-            System.out.println("Gennemsnit for studerende : " + student.getNames() + " = " + student.studerendeGennemsnit() + System.lineSeparator());
+            System.out.println("Højeste karater for: " + student.getName() + " = " + student.getHøjestekarakter());
+            System.out.println("Gennemsnit for studerende : " + student.getName() + " = " + student.studerendeGennemsnit() + System.lineSeparator());
 
         }
         System.out.println("Samlet Gennemsnit af team1: " + team1.gennemsnitTeam() + System.lineSeparator());
@@ -64,12 +64,12 @@ public class App {
         Student[] highScoreStudents1 = team1.highScoreStudents(minAverage);
         System.out.println("Team 1");
         for (Student highScoreStudent : highScoreStudents1)
-            System.out.println(highScoreStudent.getNames() + " with an average of " + highScoreStudent.studerendeGennemsnit());
+            System.out.println(highScoreStudent.getName() + " with an average of " + highScoreStudent.studerendeGennemsnit());
 
         Student[] highScoreStudents2 = team2.highScoreStudents(minAverage);
         System.out.println("\nTeam 2");
         for (Student highScoreStudent : highScoreStudents2)
-            System.out.println(highScoreStudent.getNames() + " with an average of " + highScoreStudent.studerendeGennemsnit());
+            System.out.println(highScoreStudent.getName() + " with an average of " + highScoreStudent.studerendeGennemsnit());
 
         //Random svar test
         System.out.println("\nRandom svar test på student1");
@@ -80,13 +80,13 @@ public class App {
         System.out.println("\nSvar fra studerende i team 1(Random)\n");
         for (Student student : team1.activeStudentInTeam()) {
             student.GenererRandomSvar();
-            System.out.println(student.getNames() + " Svar: " + Arrays.toString(student.getSvar()));
+            System.out.println(student.getName() + " Svar: " + Arrays.toString(student.getSvar()));
         }
 
         System.out.println("\nSvar fra studerende i team 2(Random)\n");
         for (Student student : team2.activeStudentInTeam()) {
             student.GenererRandomSvar();
-            System.out.println(student.getNames() + " svar: " + Arrays.toString(student.getSvar()));
+            System.out.println(student.getName() + " svar: " + Arrays.toString(student.getSvar()));
 
         }
         System.out.println();
@@ -96,7 +96,7 @@ public class App {
         System.out.println("Den studerendes svar: " + Arrays.toString(Student1.getSvar()));
 
         int correctCount = Student1.correctAnswers(correctSvar);
-        System.out.println("Antal korrekte svar for " + Student1.getNames() + ": " + correctCount + System.lineSeparator());
+        System.out.println("Antal korrekte svar for " + Student1.getName() + ": " + correctCount + System.lineSeparator());
 
         // Print stats for studerende i team 1
         System.out.println("\nStatistik for studerende i Team 1:");
@@ -107,8 +107,11 @@ public class App {
         }
         System.out.println("\nStatistik for studerende i Team 2:");
         String[] team2Stats = team2.getStudentStatistics(correctSvar);
-        for (String stats : team1Stats) {
+        for (String stats : team2Stats) {
             System.out.println(stats);
         }
+
+        team1.printAnswerPerQuestion();
+
     }
 }

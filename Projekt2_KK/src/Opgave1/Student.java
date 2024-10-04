@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Student {
-    private String names;
+    private String name;
     private boolean active;
     private int[] grades;
     private char[] svar;
@@ -14,14 +14,14 @@ public class Student {
     private static final int ANTAL_SPØRGSMÅL = 10;
 
     public Student(String name, boolean active, int[] grades) {
-        this.names = name;
+        this.name = name;
         this.active = active;
         this.grades = grades;
         this.svar = new char[10];
     }
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
     public boolean isActive() {
@@ -37,7 +37,7 @@ public class Student {
             activitystatus = "Inaktiv";
         }
 
-        return "Elevens navn: = " + names + ", Studieaktivitet: " + activitystatus + ", Karakter " + Arrays.toString(grades);
+        return "Elevens navn: = " + name + ", Studieaktivitet: " + activitystatus + ", Karakter " + Arrays.toString(grades);
 
     }
 

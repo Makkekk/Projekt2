@@ -7,11 +7,13 @@ public class Team {
     private String name;
     private String room;
     private ArrayList<Student> studentList;
+    private char[] correctAnswer;
 
-    public Team(String name, String room) {
+    public Team(String name, String room, char[] svar) {
         this.name = name;
         this.room = room;
         this.studentList = new ArrayList<>();
+        this.correctAnswer = svar;
     }
 
     public void addStudent(Student student) {
@@ -22,7 +24,7 @@ public class Team {
     public void removeStudent(String studentName) {
         //Fjern students by name
         for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getNames().equals(studentName)) {
+            if (studentList.get(i).getName().equals(studentName)) {
                 studentList.remove(i);
             }
         }
@@ -45,7 +47,7 @@ public class Team {
 
     public void removeStudentByName(String studentname) {
         for (Student student : studentList) {
-            if (student.getNames().equals(studentname)) {
+            if (student.getName().equals(studentname)) {
 
                 removeStudent(studentname);
             }
@@ -87,8 +89,9 @@ public class Team {
         return highScores.toArray(new Student[0]);
     }
 
+
     public String[] getStudentStatistics(char[] correctAnswer) {
-        String[] stats = new String[studentList.size() + 1]; //WHY??
+        String[] stats = new String[studentList.size() + 1];
 
         stats[0] = String.format("%-20s %-10s %-10s", "Navn", "Gennemsnit", "Rigtige svar");
 
@@ -96,10 +99,28 @@ public class Team {
             Student student = studentList.get(i);
             double average = student.studerendeGennemsnit();
             int correctcount = student.correctAnswers(correctAnswer);
-
-            stats[i + 1] = String.format("%-20s %-10.2f %-10d", student.getNames(), average, correctcount);
+            stats[i + 1] = String.format("%-20s %-10.2f %-10d", student.getName(), average, correctcount);
         }
         return stats;
     }
 
+    public int AnswerPerQuestion(int questionIndex) {
+        int correctCount = 0;
+        for (Student student : studentList) {
+            if (student.isActive()) {
+                if (student.getSvar()[questionIndex] == correctAnswer[questionIndex]) {
+                    correctCount++;
+                }
+            }
+        }
+
+        return correctCount;
+    }
+    public void printAnswerPerQuestion(){
+
+        for (int i = 0; i < correctAnswer.length; i++) {
+            int count = AnswerPerQuestion(i);
+            System.out.printf("Question %d: Correct Answer = '%c', Correctly answered by %d students%n", (i + 1), correctAnswer[i], count);
+        }
+    }
 }
